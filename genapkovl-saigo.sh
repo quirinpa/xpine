@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-HOSTNAME="saigo"
+HOSTNAME="xpine"
 
 cleanup() {
 	rm -rf "$tmp"
@@ -28,41 +28,43 @@ mkdir -p "$tmp"/etc/apk
 mkdir -p "$tmp"/etc/network
 mkdir -p "$tmp"/root
 
-cp ~/aports/scripts/wallpaper.png "$tmp"/etc/wallpaper.png
-cp ~/aports/scripts/tint2.tar.gz "$tmp"/etc/tint2.tar.gz
-cp ~/aports/scripts/openbox.tar.gz "$tmp"/etc/openbox.tar.gz
-
 makefile root:root 0644 "$tmp"/etc/hostname <<EOF
 $HOSTNAME
 EOF
 
-makefile root:root 0644 "$tmp"/etc/apk/world <<EOF
-alpine-base
-xorg-server
-xf86-input-libinput
-eudev
-mesa-dri-gallium
-openbox
-xterm
-font-noto
-xf86-video-fbdev
-xf86-video-vesa
-xf86-video-nouveau
-xf86-video-intel
-xf86-input-vmmouse
-xf86-input-synaptics
-xf86-input-evdev
-feh
-tint2
-alsa-utils
-alsaconf
-pulseaudio
-pulseaudio-utils
-pavucontrol-qt
-agetty
-picom
-flatpak
-EOF
+# makefile root:root 0644 "$tmp"/etc/apk/world <<EOF
+# agetty
+# aisleriot
+# alpine-base
+# alsa-utils
+# alsaconf
+# dbus-x11
+# eudev
+# font-noto
+# gnome-mines
+# mesa-dri-gallium
+# network-manager-applet
+# networkmanager
+# networkmanager-wifi
+# pavucontrol
+# picom
+# pulseaudio
+# pulseaudio-alsa
+# pulseaudio-bluez
+# pulseaudio-utils
+# vim
+# vlc-qt
+# xf86-input-evdev
+# xf86-input-libinput
+# xf86-input-synaptics
+# xf86-input-vmmouse
+# xf86-video-fbdev
+# xf86-video-intel
+# xf86-video-nouveau
+# xf86-video-vesa
+# xfce4
+# xorg-server
+# EOF
 
 makefile root:root 0755 "$tmp"/etc/inittab <<EOF
 # /etc/inittab
@@ -91,7 +93,8 @@ makefile root:root 0755 "$tmp"/etc/.profile <<EOF
 #!/bin/sh -e
 
 setup-devd -C mdev
-startx
+setup-xorg-base
+setup-desktop xfce
 EOF
 
 makefile root:root 0755 "$tmp"/etc/setup-script <<EOF
@@ -104,7 +107,7 @@ iface eth0 inet dhcp
 "
 
 KEYMAPOPTS="us us"
-HOSTNAMEOPTS="-n saigo"
+HOSTNAMEOPTS="-n xpine"
 DNSOPTS="8.8.8.8"
 TIMEZONEOPTS="-z UTC"
 PROXYOPTS="none"
@@ -115,10 +118,6 @@ DISKOPTS="-m sys /dev/vda"
 EOF
 
 makefile root:root 0755 "$tmp"/etc/setup.sh <<EOF
-mkdir -p /root/.config
-tar -xzvf /etc/tint2.tar.gz -C /root/.config
-tar -xzvf /etc/openbox.tar.gz -C /root/.config
-
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 mv /etc/setup-alpine /sbin/setup-alpine
@@ -129,7 +128,7 @@ cp /etc/.profile /root/
 EOF
 
 makefile root:root 0644 "$tmp"/etc/motd <<EOF
-Welcome to SaigOS!
+Welcome to xpine
 EOF
 
 rc_add devfs sysinit
@@ -146,7 +145,16 @@ rc_add bootmisc boot
 rc_add syslog boot
 
 rc_add udev boot
-rc_add dbus boot
+
+rc_add acpid default
+rc_add alsa default
+rc_add chronyd default
+rc_add crond default
+rc_add dbus default
+rc_add lightdm default
+rc_add networkmanager default
+rc_add sshd default
+rc_add udev-postmount default
 
 rc_add mount-ro shutdown
 rc_add killprocs shutdown

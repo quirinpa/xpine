@@ -1,0 +1,23 @@
+[xfdesktop-version-4.10.3+-rcfile_format]
+4.10.3+=true
+
+[/home/david/Desktop/Emulador de terminal.desktop]
+row=2
+col=0
+
+[cdrom]
+row=3
+col=0
+
+[Lixo]
+row=4
+col=0
+
+[/]
+row=0
+col=0
+
+[/home/david]
+row=1
+col=0
+

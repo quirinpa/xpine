@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Solitário Aisleriot
+Comment=Jogue muitos jogos solitários diferentes
+Exec=sol
+Icon=gnome-aisleriot
+Path=
+Terminal=false
+StartupNotify=true

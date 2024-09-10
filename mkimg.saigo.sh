@@ -33,14 +33,25 @@ profile_saigo() {
 		parted rsync sfdisk syslinux util-linux xfsprogs zstd zfs
 
 		xorg-server xf86-input-libinput eudev mesa-dri-gallium
-		openbox xterm font-noto
+		xfce4 font-terminus
 		xf86-video-fbdev xf86-video-vesa xf86-video-nouveau
 		xf86-input-synaptics xf86-input-vmmouse xf86-input-evdev
 		xf86-video-intel sddm
 		alsa-utils alsaconf pulseaudio pulseaudio-utils
 		pavucontrol-qt
 
-		feh tint2 picom flatpak
+		alsa-utils alsaconf
+		pulseaudio pulseaudio-alsa pulseaudio-bluez pulseaudio-utils
+		pavucontrol
+		vlc-qt
+
+		dbus-x11  eudev
+
+		networkmanager networkmanager-wifi network-manager-applet
+
+		gnome-mines aisleriot
+
+		vim
 		"
 
 	local _k _a

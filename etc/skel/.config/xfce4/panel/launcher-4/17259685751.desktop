@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Emulador de terminal
+Comment=Utilizar a linha de comandos
+Exec=exo-open --launch TerminalEmulator
+Icon=org.xfce.terminalemulator
+Path=
+Terminal=false
+StartupNotify=true
+X-XFCE-Source=file:///home/david/Desktop/Emulador%20de%20terminal.desktop
